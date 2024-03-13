@@ -17,3 +17,8 @@ test('reverse of releveler', () => {
 
   expect(result).toBe('releveler');
 });
+test('palindrome of madam', () => {
+  const result = reverse('madam');
+
+  expect(result).toBe('madam');
+});
