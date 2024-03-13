@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const config = require('./utils/config');
 require('dotenv').config();
 
 const blogSchema = new mongoose.Schema({
@@ -20,7 +21,8 @@ blogSchema.set('toJSON', {
 
 const Blog = mongoose.model('Blog', blogSchema);
 
-const mongoUrl = process.env.MONGODB_URI;
+const mongoUrl = config.MONGODB_URI;
+console.log('Connicg to the database....');
 
 mongoose
   .connect(mongoUrl)
