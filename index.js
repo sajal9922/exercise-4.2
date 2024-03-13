@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const blogSchema = new mongoose.Schema({
   title: String,
@@ -19,8 +20,9 @@ blogSchema.set('toJSON', {
 
 const Blog = mongoose.model('Blog', blogSchema);
 
-const mongoUrl =
-  'mongodb+srv://fullstack:A8QOFF0SW0dQy4Ig@cluster-demo.7tbn5u1.mongodb.net/blogListApp?retryWrites=true&w=majority&appName=Cluster-demo';
+const mongoUrl = process.env.MONGODB_URI;
+console.log(mongoUrl);
+
 mongoose
   .connect(mongoUrl)
   .then(() => {
