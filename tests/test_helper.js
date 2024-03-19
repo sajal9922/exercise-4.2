@@ -20,7 +20,7 @@ const initialBlogs = [
 const blogsInDb = async () => {
   try {
     const blogs = await Blog.find();
-    console.log('Blogs retrieved from the database:', blogs);
+    //console.log('Blogs retrieved from the database:', blogs);
     return blogs;
   } catch (error) {
     console.error('Error retrieving blogs from the database:', error);
