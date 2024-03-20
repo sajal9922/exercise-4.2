@@ -31,7 +31,6 @@ const blogsInDb = async () => {
 
 const usersInDb = async () => {
   const users = await User.find({});
-  console.log('Users retrieved from the database:', users);
 
   return users.map((u) => u.toJSON());
 };
