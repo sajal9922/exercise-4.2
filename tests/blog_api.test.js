@@ -2,9 +2,11 @@ const supertest = require('supertest');
 const app = require('../app');
 const api = supertest(app);
 const Blog = require('../models/blog');
+const User = require('../models/user');
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
-const { initialBlogs, blogsInDb } = require('./test_helper');
+const { initialBlogs, blogsInDb, usersInDb } = require('./test_helper');
 describe('Blog API', () => {
   beforeEach(async () => {
     await Blog.deleteMany({});
@@ -66,6 +68,44 @@ test('Deletes a blog by Id, number of blog reduce by 1 and blog with same id doe
   const id = blogsAtEnd.map((blog) => blog.id);
   expect(id).not.toContain(blogToDelete.id);
 });
+
+//Creating a user test
+
+describe('when there is initially one user in db', () => {
+  beforeEach(async () => {
+    await User.deleteMany({});
+
+    const passwordHash = await bcrypt.hash('sekret', 10);
+    const user = new User({ username: 'root', passwordHash });
+
+    await user.save();
+  });
+
+  test('creation succeeds with a fresh username', async () => {
+    const usersAtStart = await usersInDb();
+
+    const newUser = {
+      username: 'mluukkai',
+      name: 'Matti Luukkainen',
+      password: 'salainen',
+    };
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const usersAtEnd = await usersInDb();
+    console.log('Users at end:', usersAtEnd);
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1);
+
+    const usernames = usersAtEnd.map((u) => u.username);
+
+    expect(usernames).toContain(newUser.username);
+  });
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });

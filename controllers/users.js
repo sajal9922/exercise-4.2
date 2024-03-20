@@ -2,10 +2,6 @@ const bcrypt = require('bcrypt');
 const usersRouter = require('express').Router();
 const User = require('../models/user');
 
-usersRouter.get('/', async (request, response) => {
-  const users = await User.find({}).populate('blogs');
-  response.json(users);
-});
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body;
   // if (!body.password || body.password.length < 3) {
@@ -18,8 +14,13 @@ usersRouter.post('/', async (request, response) => {
     name,
     passwordHash,
   });
+  console.log('user:', user);
   const savedUser = await user.save();
   response.status(201).json(savedUser);
 });
 
+usersRouter.get('/', async (request, response) => {
+  const users = await User.find({}).populate('blogs');
+  response.json(users);
+});
 module.exports = usersRouter;
