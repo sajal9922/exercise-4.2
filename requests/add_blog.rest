@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhamFsIiwiaWQiOiI2NWZiMDBiNWY5OGU2NmQ2Y2FkNzlhZmUiLCJpYXQiOjE3MTEwMTM0MTB9.I8Xjm_6fbqlU1I7wJzJCF96rfN1J2etQMKtoGwOOdn0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJlbiIsImlkIjoiNjVmYjAyY2Q5NjhhZmVkMDRmZjJhZjg2IiwiaWF0IjoxNzExMDE1Nzc3fQ.E5UCMlWdR-DEaVRR6LcEoQ0X0KoSmpt9q1Lcctneu-Q
  
     {
-        "title": "Read History",
-        "author": "Neel Anderson",
-        "url": "WWW.books.com",
-        "likes": 550
+        "title": "Traveling the world",
+        "author": "John Doe",
+        "url": "WWW.johndoe.com",
+        "likes": 50
     }
